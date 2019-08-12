@@ -7,6 +7,9 @@ import Navigation from './components/Navigation';
 import Products from './components/Products';
 import ShoppingCart from './components/ShoppingCart';
 
+// Contexts
+import { ProductContext } from './contexts/ProductContext';
+
 function App(): React.ReactElement {
   const [products] = useState<ProductData[]>(data);
   const [cart, setCart] = useState<ProductData[]>([]);
@@ -16,23 +19,19 @@ function App(): React.ReactElement {
   };
 
   return (
-    <div className="App">
-      <Navigation cart={cart} />
+    <ProductContext.Provider value={{ products, addItem }}>
+      <div className="App">
+        <Navigation cart={cart} />
 
-      {/* Routes */}
-      <Route
-        exact
-        path="/"
-        render={(): React.ReactElement => (
-          <Products products={products} addItem={addItem} />
-        )}
-      />
+        {/* Routes */}
+        <Route exact path="/" component={Products} />
 
-      <Route
-        path="/cart"
-        render={(): React.ReactElement => <ShoppingCart cart={cart} />}
-      />
-    </div>
+        <Route
+          path="/cart"
+          render={(): React.ReactElement => <ShoppingCart cart={cart} />}
+        />
+      </div>
+    </ProductContext.Provider>
   );
 }
 
