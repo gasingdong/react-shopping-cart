@@ -8,7 +8,7 @@ import Products from './components/Products';
 import ShoppingCart from './components/ShoppingCart';
 
 // Contexts
-import { ProductContext } from './contexts/ProductContext';
+import ProductContext from './contexts/ProductContext';
 
 function App(): React.ReactElement {
   const [products] = useState<ProductData[]>(data);
