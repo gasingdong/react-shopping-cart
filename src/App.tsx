@@ -19,9 +19,13 @@ function App(): React.ReactElement {
     setCart([...cart, item]);
   };
 
+  const removeItem = (id: number): void => {
+    setCart(cart.filter((item): boolean => item.id !== id));
+  };
+
   return (
     <ProductContext.Provider value={{ products, addItem }}>
-      <CartContext.Provider value={{ cart }}>
+      <CartContext.Provider value={{ cart, removeItem }}>
         <div className="App">
           <Navigation />
 
