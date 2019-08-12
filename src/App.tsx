@@ -10,10 +10,11 @@ import ShoppingCart from './components/ShoppingCart';
 // Contexts
 import ProductContext from './contexts/ProductContext';
 import CartContext from './contexts/CartContext';
+import useLocalStorage from './hooks/useLocalStorage';
 
 function App(): React.ReactElement {
   const [products] = useState<ProductData[]>(data);
-  const [cart, setCart] = useState<ProductData[]>([]);
+  const [cart, setCart] = useLocalStorage<ProductData[]>('cart', []);
 
   const addItem = (item: ProductData): void => {
     setCart([...cart, item]);
